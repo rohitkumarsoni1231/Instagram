@@ -28,13 +28,12 @@ public class AuthManager {
                 
                 Auth.auth().createUser(withEmail: email, password: password) { result, error in
                    guard error == nil, result != nil else {
-                       //Firebase auth could not create account
+                       // Firebase auth could not create account
                        completion(false)
                        return
                     }
                     
-                    // Insert into Database
-                    
+                    // Insert into Database 
                     DatabaseManager.shared.insertNewUser(with: email, username: username) { inserted in
                         if inserted {
                             completion(true)
@@ -58,7 +57,7 @@ public class AuthManager {
         if let email = email {
             // email log in
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-                guard authResult != nil, error != nil else {
+                guard authResult != nil, error == nil else {
                     completion(false)
                     return
                 }
@@ -69,6 +68,20 @@ public class AuthManager {
             // username log in
             print(username)
         }
+    }
+    
+    /// Attempt to logout firebase user
+    public func logOut(completion: (Bool) -> Void) {
+        do {
+            try Auth.auth().signOut()
+            completion(true)
+            return
+        } catch {
+            print("error")
+            completion(false)
+            return
+        }
+        
     }
     
     

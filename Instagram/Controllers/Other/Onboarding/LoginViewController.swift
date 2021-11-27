@@ -179,7 +179,7 @@ class LoginViewController: UIViewController {
     }
     
     private func addSubViews() {
-        view.addSubview( usernameEmailField)
+        view.addSubview(usernameEmailField)
         view.addSubview(passwordField)
         view.addSubview(loginButton)
         view.addSubview(termsButton)
@@ -193,7 +193,7 @@ class LoginViewController: UIViewController {
         usernameEmailField.resignFirstResponder()
         
         guard let usernameEmail = usernameEmailField.text, !usernameEmail.isEmpty,
-        let password  = passwordField.text, !password.isEmpty, password.count >= 8 else { 
+        let password = passwordField.text, !password.isEmpty, password.count >= 8 else {
             return
         }
         
